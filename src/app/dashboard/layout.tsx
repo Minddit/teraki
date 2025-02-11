@@ -14,7 +14,7 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="min-h-screen bg-background">
+    <div className={`min-h-screen bg-background ${inter.className}`}>
       <div className="flex min-h-screen">
         {/* Sidebar - vom adăuga aici */}
         <div className="hidden border-r bg-gray-100/40 lg:block dark:bg-gray-800/40">
