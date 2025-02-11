@@ -1,13 +1,12 @@
+import { DashboardStats } from "@/components/dashboard/stats"
+import { ProgressChart } from "@/components/dashboard/progress-chart"
+import { RecentCases } from "@/components/dashboard/recent-cases"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Dashboard - Crypto Recovery",
   description: "Vizualizare și gestionare cazuri de recuperare crypto",
 }
-
-import { DashboardStats } from "@/components/dashboard/stats"
-import { ProgressChart } from "@/components/dashboard/progress-chart"
-import { RecentCases } from "@/components/dashboard/recent-cases"
 
 export default function DashboardPage() {
   // Vom înlocui asta cu date reale mai târziu
