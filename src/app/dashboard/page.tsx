@@ -6,6 +6,8 @@ export const metadata: Metadata = {
 }
 
 import { DashboardStats } from "@/components/dashboard/stats"
+import { ProgressChart } from "@/components/dashboard/progress-chart"
+import { RecentCases } from "@/components/dashboard/recent-cases"
 
 export default function DashboardPage() {
   // Vom înlocui asta cu date reale mai târziu
@@ -26,10 +28,10 @@ export default function DashboardPage() {
       
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
         <div className="col-span-4">
-          {/* Grafic pentru progres - vom adăuga aici */}
+          <ProgressChart />
         </div>
         <div className="col-span-3">
-          {/* Listă cu cazuri recente - vom adăuga aici */}
+          <RecentCases />
         </div>
       </div>
     </div>
