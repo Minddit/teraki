@@ -78,3 +78,12 @@ export type chartType = {
         responsive: boolean,
     },
 }
+
+export type paymentType = {
+    id: string,
+    date: string,
+    amount: number,
+    status: 'Pending' | 'Completed' | 'Failed',
+    method: string,
+    description?: string
+}
