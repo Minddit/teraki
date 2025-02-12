@@ -12,7 +12,11 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.1.1",
+    "@prisma/client": "^6.3.1",
+    "@supabase/ssr": "^0.5.2",
+    "@supabase/supabase-js": "^2.48.1",
     "@vercel/analytics": "^1.1.2",
+    "@vercel/postgres": "^0.10.0",
     "bootstrap-icons": "^1.11.3",
     "chart.js": "^4.4.1",
     "next": "^14.1.0",
@@ -30,6 +34,7 @@
     "eslint-config-next": "^14.1.0",
     "nodemon": "^3.1.9",
     "postcss": "^8.4.34",
+    "prisma": "^6.3.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
   }
