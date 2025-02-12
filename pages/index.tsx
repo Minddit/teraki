@@ -114,34 +114,63 @@ export default function Landing() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
                   </svg>
                 </div>
-                <h3 className="mt-6 text-2xl font-semibold text-white text-center">Get Started Today</h3>
-                <p className="mt-2 text-gray-400 text-center">Create your account to start the recovery process</p>
+                <h2 className="mt-6 text-2xl font-bold text-center text-white mb-6">
+                  Login Form
+                </h2>
                 
-                <div className="mt-8 space-y-6">
+                {/* Login/Signup Tabs */}
+                <div className="flex bg-[#1B1B1B] p-1 rounded-lg mb-8">
+                  <button className="flex-1 py-3 px-6 text-white font-medium bg-[#00e5cc] rounded-lg transition-all">
+                    Login
+                  </button>
+                  <Link href="/auth/register">
+                    <a className="flex-1 py-3 px-6 text-gray-400 font-medium text-center hover:text-[#00e5cc] transition-colors">
+                      Signup
+                    </a>
+                  </Link>
+                </div>
+
+                <form className="space-y-6">
                   <div className="space-y-4">
-                    <Link href="/auth/login">
-                      <a className="w-full flex justify-center py-3 px-4 rounded-lg bg-gradient-to-r from-cyan-500 to-cyan-600 text-white font-semibold hover:from-cyan-600 hover:to-cyan-700 transition-all duration-200">
-                        Sign In
-                      </a>
-                    </Link>
-                    <Link href="/auth/register">
-                      <a className="w-full flex justify-center py-3 px-4 rounded-lg border border-cyan-500/50 text-cyan-400 font-semibold hover:bg-cyan-500/10 transition-all duration-200">
-                        Create Account
+                    <input
+                      type="email"
+                      required
+                      placeholder="Email Address"
+                      className="w-full px-4 py-3 bg-[#1B1B1B] text-white placeholder:text-gray-400 rounded-lg border border-gray-700 focus:border-[#00e5cc] focus:ring-[#00e5cc] transition-colors"
+                    />
+
+                    <input
+                      type="password"
+                      required
+                      placeholder="Password"
+                      className="w-full px-4 py-3 bg-[#1B1B1B] text-white placeholder:text-gray-400 rounded-lg border border-gray-700 focus:border-[#00e5cc] focus:ring-[#00e5cc] transition-colors"
+                    />
+                  </div>
+
+                  <div className="text-right">
+                    <Link href="/auth/forgot-password">
+                      <a className="text-[#00e5cc] hover:text-[#00d1ba] text-sm font-medium">
+                        Forgot password?
                       </a>
                     </Link>
                   </div>
-                  
-                  <p className="text-sm text-gray-400 text-center">
-                    By signing in, you agree to our{' '}
-                    <Link href="/terms">
-                      <a className="text-cyan-400 hover:text-cyan-300">Terms of Service</a>
-                    </Link>
-                    {' '}and{' '}
-                    <Link href="/privacy">
-                      <a className="text-cyan-400 hover:text-cyan-300">Privacy Policy</a>
+
+                  <button
+                    type="submit"
+                    className="w-full py-3 rounded-lg bg-[#00e5cc] text-black font-medium hover:bg-[#00d1ba] transition-colors"
+                  >
+                    Login
+                  </button>
+
+                  <p className="text-center text-gray-400 text-sm">
+                    Create an account{' '}
+                    <Link href="/auth/register">
+                      <a className="text-[#00e5cc] hover:text-[#00d1ba] font-medium">
+                        Signup now
+                      </a>
                     </Link>
                   </p>
-                </div>
+                </form>
               </div>
 
               {/* Right Column - Text Content */}
