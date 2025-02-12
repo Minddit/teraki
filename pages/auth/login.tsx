@@ -33,27 +33,27 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-200 via-purple-100 to-blue-200 flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-white rounded-[32px] p-10 shadow-[0_4px_28px_rgba(0,0,0,0.08)]">
-        <h1 className="text-[28px] font-bold text-center text-gray-900 mb-8">
+    <div className="min-h-screen bg-[#0d0f1b] flex items-center justify-center p-4">
+      <div className="w-full max-w-md bg-[#151823] rounded-xl p-8 shadow-xl">
+        <h2 className="text-2xl font-bold text-center text-white mb-6">
           Login Form
-        </h1>
+        </h2>
         
-        {/* Login/Signup Toggle */}
-        <div className="flex bg-gray-50 p-1 rounded-full mb-8">
-          <button className="flex-1 py-3 text-white font-medium bg-blue-600 rounded-full transition-all">
+        {/* Login/Signup Tabs */}
+        <div className="flex bg-[#1B1B1B] p-1 rounded-lg mb-8">
+          <button className="flex-1 py-3 px-6 text-white font-medium bg-[#00e5cc] rounded-lg transition-all">
             Login
           </button>
           <Link href="/auth/register">
-            <a className="flex-1 py-3 text-gray-500 font-medium text-center hover:text-gray-700 transition-colors">
+            <a className="flex-1 py-3 px-6 text-gray-400 font-medium text-center hover:text-[#00e5cc] transition-colors">
               Signup
             </a>
           </Link>
         </div>
 
-        <form onSubmit={handleLogin} className="space-y-5">
+        <form onSubmit={handleLogin} className="space-y-6">
           {error && (
-            <div className="bg-red-50 text-red-500 text-sm px-4 py-3 rounded-full">
+            <div className="bg-red-900/20 border border-red-500/20 text-red-500 px-4 py-3 rounded-lg text-sm">
               {error}
             </div>
           )}
@@ -65,7 +65,7 @@ export default function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email Address"
-              className="w-full px-6 h-[60px] text-lg text-gray-600 placeholder:text-gray-400 bg-gray-50 rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.04)] focus:outline-none focus:ring-0 border-0"
+              className="w-full px-4 py-3 bg-[#1B1B1B] text-white placeholder:text-gray-400 rounded-lg border border-gray-700 focus:border-[#00e5cc] focus:ring-[#00e5cc] transition-colors"
             />
 
             <input
@@ -74,13 +74,13 @@ export default function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
-              className="w-full px-6 h-[60px] text-lg text-gray-600 placeholder:text-gray-400 bg-gray-50 rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.04)] focus:outline-none focus:ring-0 border-0"
+              className="w-full px-4 py-3 bg-[#1B1B1B] text-white placeholder:text-gray-400 rounded-lg border border-gray-700 focus:border-[#00e5cc] focus:ring-[#00e5cc] transition-colors"
             />
           </div>
 
           <div className="text-right">
             <Link href="/auth/forgot-password">
-              <a className="text-blue-500 hover:text-blue-600 text-sm">
+              <a className="text-[#00e5cc] hover:text-[#00d1ba] text-sm font-medium">
                 Forgot password?
               </a>
             </Link>
@@ -89,15 +89,15 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full h-[60px] bg-blue-600 text-white font-medium rounded-full hover:bg-blue-700 transition-colors"
+            className="w-full py-3 rounded-lg bg-[#00e5cc] text-black font-medium hover:bg-[#00d1ba] transition-colors"
           >
             {loading ? 'Signing in...' : 'Login'}
           </button>
 
-          <p className="text-center text-gray-600">
+          <p className="text-center text-gray-400 text-sm">
             Create an account{' '}
             <Link href="/auth/register">
-              <a className="text-blue-500 hover:text-blue-600">
+              <a className="text-[#00e5cc] hover:text-[#00d1ba] font-medium">
                 Signup now
               </a>
             </Link>
