@@ -50,40 +50,62 @@ export default function Landing() {
               </div>
 
               {/* Right side - Auth Card */}
-              <div className="relative bg-[#151823] rounded-xl p-8 shadow-xl">
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-[#00e5cc]">
-                  <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-                  </svg>
-                </div>
-                <h3 className="mt-6 text-2xl font-semibold text-white text-center">Get Started Today</h3>
-                <p className="mt-2 text-gray-400 text-center">Create your account to start the recovery process</p>
+              <div className="bg-white rounded-3xl p-8 shadow-xl w-full max-w-md">
+                <h2 className="text-2xl font-bold text-center mb-6">Login Form</h2>
                 
-                <div className="mt-8 space-y-6">
+                {/* Login/Signup Tabs */}
+                <div className="flex bg-gray-100 p-1 rounded-lg mb-8">
+                  <button className="flex-1 py-3 px-6 text-white font-medium bg-blue-600 rounded-lg transition-all">
+                    Login
+                  </button>
+                  <Link href="/auth/register">
+                    <a className="flex-1 py-3 px-6 text-gray-600 font-medium text-center hover:text-blue-600 transition-colors">
+                      Signup
+                    </a>
+                  </Link>
+                </div>
+
+                <form className="space-y-6">
                   <div className="space-y-4">
-                    <Link href="/auth/login">
-                      <a className="w-full flex justify-center py-3 px-4 rounded-lg bg-[#00e5cc] text-black font-semibold hover:bg-[#00d1ba] transition-colors">
-                        Sign In
-                      </a>
-                    </Link>
-                    <Link href="/auth/register">
-                      <a className="w-full flex justify-center py-3 px-4 rounded-lg border border-[#00e5cc] text-[#00e5cc] font-semibold hover:bg-[#151823] transition-colors">
-                        Create Account
+                    <input
+                      type="email"
+                      required
+                      placeholder="Email Address"
+                      className="w-full px-4 py-3 bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors"
+                    />
+
+                    <input
+                      type="password"
+                      required
+                      placeholder="Password"
+                      className="w-full px-4 py-3 bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors"
+                    />
+                  </div>
+
+                  <div className="text-right">
+                    <Link href="/auth/forgot-password">
+                      <a className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                        Forgot password?
                       </a>
                     </Link>
                   </div>
-                  
-                  <p className="text-sm text-gray-400 text-center">
-                    By signing in, you agree to our{' '}
-                    <Link href="/terms">
-                      <a className="text-[#00e5cc] hover:text-[#00d1ba]">Terms of Service</a>
-                    </Link>
-                    {' '}and{' '}
-                    <Link href="/privacy">
-                      <a className="text-[#00e5cc] hover:text-[#00d1ba]">Privacy Policy</a>
+
+                  <button
+                    type="submit"
+                    className="w-full py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors"
+                  >
+                    Login
+                  </button>
+
+                  <p className="text-center text-gray-600 text-sm">
+                    Create an account{' '}
+                    <Link href="/auth/register">
+                      <a className="text-blue-600 hover:text-blue-700 font-medium">
+                        Signup now
+                      </a>
                     </Link>
                   </p>
-                </div>
+                </form>
               </div>
             </div>
           </div>
