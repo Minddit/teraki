@@ -1,4 +1,4 @@
-import { menuItemType, investmentType, transactionType, cardType, reportType, paymentType, chartType } from "@/types/types"
+import { menuItemType, investmentType, transactionType, cardType, reportType, paymentType, chartType, RecentCaseType } from "@/types/types"
 
 //menu items
 export const menuItemsData: menuItemType[] = [
