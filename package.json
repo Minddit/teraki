@@ -1,23 +1,14 @@
 {
-<<<<<<< HEAD
-  "name": "crypto-recovery",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev --turbopack",
-=======
   "name": "teraki",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
->>>>>>> 933077a4f7bb85d5ad558f268b6adf2676979ce9
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
     "@tremor/react": "^3.18.7",
@@ -26,34 +17,12 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "autoprefixer": "^10.0.1",
     "eslint": "^9",
     "eslint-config-next": "15.1.7",
-=======
-    "@radix-ui/react-dropdown-menu": "^2.0.6",
-    "@radix-ui/react-navigation-menu": "^1.1.4",
-    "@radix-ui/react-slot": "^1.0.2",
-    "class-variance-authority": "^0.7.0",
-    "clsx": "^2.0.0",
-    "lucide-react": "^0.294.0",
-    "next": "14.0.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "recharts": "^2.10.3",
-    "tailwind-merge": "^2.1.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.26.8",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "babel-loader": "^9.1.3",
-    "eslint": "^8.0.0",
-    "eslint-config-next": "14.0.4",
->>>>>>> 933077a4f7bb85d5ad558f268b6adf2676979ce9
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
