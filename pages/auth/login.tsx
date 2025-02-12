@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { supabase } from '../../utils/supabase'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -32,61 +33,77 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-      <div className="max-w-md w-full space-y-8 p-8 bg-gray-800 rounded-lg">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-[#40E0D0]">
-            Sign in to your account
-          </h2>
+    <div className="min-h-screen bg-[#0d0f1b] flex items-center justify-center p-4">
+      <div className="w-full max-w-md bg-white rounded-3xl p-8 shadow-xl">
+        <h2 className="text-3xl font-bold text-center mb-6">Login Form</h2>
+        
+        {/* Login/Signup Tabs */}
+        <div className="flex bg-gray-50 rounded-xl p-1 mb-8">
+          <button className="flex-1 py-3 px-6 rounded-xl bg-[#40E0D0] text-white font-medium">
+            Login
+          </button>
+          <Link href="/auth/register">
+            <a className="flex-1 py-3 px-6 text-gray-500 font-medium text-center hover:text-[#40E0D0] transition-colors">
+              Signup
+            </a>
+          </Link>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleLogin}>
+
+        <form onSubmit={handleLogin} className="space-y-6">
           {error && (
-            <div className="bg-red-500 text-white p-3 rounded">
+            <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm">
               {error}
             </div>
           )}
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label htmlFor="email" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-700 bg-gray-700 text-white placeholder-gray-400 rounded-t-md focus:outline-none focus:ring-[#40E0D0] focus:border-[#40E0D0] focus:z-10 sm:text-sm"
-                placeholder="Email address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="sr-only">
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-700 bg-gray-700 text-white placeholder-gray-400 rounded-b-md focus:outline-none focus:ring-[#40E0D0] focus:border-[#40E0D0] focus:z-10 sm:text-sm"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
+
+          <div className="space-y-4">
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#40E0D0] focus:ring-[#40E0D0] text-gray-700 text-base transition-colors"
+              placeholder="Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <input
+              id="password"
+              name="password"
+              type="password"
+              required
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#40E0D0] focus:ring-[#40E0D0] text-gray-700 text-base transition-colors"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
 
-          <div>
-            <button
-              type="submit"
-              disabled={loading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-black bg-[#40E0D0] hover:bg-[#3BC8BA] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#40E0D0]"
-            >
-              {loading ? 'Signing in...' : 'Sign in'}
-            </button>
+          <div className="text-right">
+            <Link href="/auth/forgot-password">
+              <a className="text-[#40E0D0] hover:text-[#3BC8BA] text-sm font-medium">
+                Forgot password?
+              </a>
+            </Link>
           </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-3 rounded-xl bg-[#40E0D0] text-white font-medium hover:bg-[#3BC8BA] transition-colors"
+          >
+            {loading ? 'Signing in...' : 'Login'}
+          </button>
+
+          <p className="text-center text-gray-500 text-sm">
+            Create an account{' '}
+            <Link href="/auth/register">
+              <a className="text-[#40E0D0] hover:text-[#3BC8BA] font-medium">
+                Signup now
+              </a>
+            </Link>
+          </p>
         </form>
       </div>
     </div>
