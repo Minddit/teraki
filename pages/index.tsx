@@ -1,7 +1,37 @@
 import Head from "next/head"
 import Link from "next/link"
+import { useState } from 'react'
+import { supabase } from '../utils/supabase'
+import { useRouter } from 'next/router'
 
 export default function Landing() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const router = useRouter()
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    setError(null)
+
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      })
+
+      if (error) throw error
+
+      // Redirect to dashboard on success
+      router.push('/dashboard')
+    } catch (error) {
+      setError(error instanceof Error ? error.message : 'An error occurred')
+    } finally {
+      setLoading(false)
+    }
+  }
   return (
     <>
       <Head>
@@ -130,11 +160,19 @@ export default function Landing() {
                   </Link>
                 </div>
 
-                <form className="space-y-6">
+                <form onSubmit={handleLogin} className="space-y-6">
+                  {error && (
+                    <div className="bg-red-900/20 border border-red-500/20 text-red-500 px-4 py-3 rounded-lg text-sm">
+                      {error}
+                    </div>
+                  )}
+
                   <div className="space-y-4">
                     <input
                       type="email"
                       required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       placeholder="Email Address"
                       className="w-full px-4 py-3 bg-[#1B1B1B] text-white placeholder:text-gray-400 rounded-lg border border-gray-700 focus:border-[#00e5cc] focus:ring-[#00e5cc] transition-colors"
                     />
@@ -142,6 +180,8 @@ export default function Landing() {
                     <input
                       type="password"
                       required
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       placeholder="Password"
                       className="w-full px-4 py-3 bg-[#1B1B1B] text-white placeholder:text-gray-400 rounded-lg border border-gray-700 focus:border-[#00e5cc] focus:ring-[#00e5cc] transition-colors"
                     />
@@ -157,9 +197,10 @@ export default function Landing() {
 
                   <button
                     type="submit"
+                    disabled={loading}
                     className="w-full py-3 rounded-lg bg-[#00e5cc] text-black font-medium hover:bg-[#00d1ba] transition-colors"
                   >
-                    Login
+                    {loading ? 'Signing in...' : 'Login'}
                   </button>
 
                   <p className="text-center text-gray-400 text-sm">
