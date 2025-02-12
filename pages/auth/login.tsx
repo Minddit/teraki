@@ -33,19 +33,19 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0d0f1b] flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-[#151823] rounded-xl p-8 shadow-xl">
-        <h2 className="text-2xl font-bold text-center text-white mb-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center p-4">
+      <div className="w-full max-w-md bg-white rounded-3xl p-8 shadow-xl">
+        <h2 className="text-2xl font-bold text-center mb-6">
           Login Form
         </h2>
         
         {/* Login/Signup Tabs */}
-        <div className="flex bg-[#1B1B1B] p-1 rounded-lg mb-8">
-          <button className="flex-1 py-3 px-6 text-white font-medium bg-[#00e5cc] rounded-lg transition-all">
+        <div className="flex bg-gray-100 p-1 rounded-lg mb-8">
+          <button className="flex-1 py-3 px-6 text-white font-medium bg-blue-600 rounded-lg transition-all">
             Login
           </button>
           <Link href="/auth/register">
-            <a className="flex-1 py-3 px-6 text-gray-400 font-medium text-center hover:text-[#00e5cc] transition-colors">
+            <a className="flex-1 py-3 px-6 text-gray-600 font-medium text-center hover:text-blue-600 transition-colors">
               Signup
             </a>
           </Link>
@@ -53,7 +53,7 @@ export default function Login() {
 
         <form onSubmit={handleLogin} className="space-y-6">
           {error && (
-            <div className="bg-red-900/20 border border-red-500/20 text-red-500 px-4 py-3 rounded-lg text-sm">
+            <div className="bg-red-100 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-sm">
               {error}
             </div>
           )}
@@ -65,7 +65,7 @@ export default function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email Address"
-              className="w-full px-4 py-3 bg-[#1B1B1B] text-white placeholder:text-gray-400 rounded-lg border border-gray-700 focus:border-[#00e5cc] focus:ring-[#00e5cc] transition-colors"
+              className="w-full px-4 py-3 bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors"
             />
 
             <input
@@ -74,13 +74,13 @@ export default function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
-              className="w-full px-4 py-3 bg-[#1B1B1B] text-white placeholder:text-gray-400 rounded-lg border border-gray-700 focus:border-[#00e5cc] focus:ring-[#00e5cc] transition-colors"
+              className="w-full px-4 py-3 bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors"
             />
           </div>
 
           <div className="text-right">
             <Link href="/auth/forgot-password">
-              <a className="text-[#00e5cc] hover:text-[#00d1ba] text-sm font-medium">
+              <a className="text-blue-600 hover:text-blue-700 text-sm">
                 Forgot password?
               </a>
             </Link>
@@ -89,15 +89,15 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-lg bg-[#00e5cc] text-black font-medium hover:bg-[#00d1ba] transition-colors"
+            className="w-full py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors"
           >
             {loading ? 'Signing in...' : 'Login'}
           </button>
 
-          <p className="text-center text-gray-400 text-sm">
+          <p className="text-center text-gray-600 text-sm">
             Create an account{' '}
             <Link href="/auth/register">
-              <a className="text-[#00e5cc] hover:text-[#00d1ba] font-medium">
+              <a className="text-blue-600 hover:text-blue-700">
                 Signup now
               </a>
             </Link>

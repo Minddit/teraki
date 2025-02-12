@@ -21,91 +21,29 @@ export default function Landing() {
 
           {/* Content */}
           <div className="relative mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              {/* Left side - Hero Text */}
-              <div className="text-center lg:text-left">
-                <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-                  <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-cyan-200">
-                    Recover Your Lost
-                  </span>
-                  <br />
-                  Cryptocurrency
-                </h1>
-                <p className="mt-6 text-lg leading-8 text-gray-300">
-                  With our 99% success rate and only 10% upfront fee, we help you recover your lost crypto assets.
-                  Professional service, transparent process, guaranteed results.
-                </p>
-                <div className="mt-10 flex items-center justify-center lg:justify-start gap-6">
-                  <Link href="/dashboard">
-                    <a className="rounded-lg bg-gradient-to-r from-cyan-500 to-cyan-600 px-8 py-3 text-lg font-semibold text-white shadow-sm hover:from-cyan-600 hover:to-cyan-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400 transition-all duration-200">
-                      Start Recovery
-                    </a>
-                  </Link>
-                  <Link href="/dashboard">
-                    <a className="text-lg font-semibold text-white hover:text-cyan-400 transition-colors">
-                      Learn More <span aria-hidden="true">→</span>
-                    </a>
-                  </Link>
-                </div>
-              </div>
-
-              {/* Right side - Auth Card */}
-              <div className="bg-white rounded-3xl p-8 shadow-xl w-full max-w-md">
-                <h2 className="text-2xl font-bold text-center mb-6">Login Form</h2>
-                
-                {/* Login/Signup Tabs */}
-                <div className="flex bg-gray-100 p-1 rounded-lg mb-8">
-                  <button className="flex-1 py-3 px-6 text-white font-medium bg-blue-600 rounded-lg transition-all">
-                    Login
-                  </button>
-                  <Link href="/auth/register">
-                    <a className="flex-1 py-3 px-6 text-gray-600 font-medium text-center hover:text-blue-600 transition-colors">
-                      Signup
-                    </a>
-                  </Link>
-                </div>
-
-                <form className="space-y-6">
-                  <div className="space-y-4">
-                    <input
-                      type="email"
-                      required
-                      placeholder="Email Address"
-                      className="w-full px-4 py-3 bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors"
-                    />
-
-                    <input
-                      type="password"
-                      required
-                      placeholder="Password"
-                      className="w-full px-4 py-3 bg-gray-50 text-gray-900 placeholder:text-gray-400 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors"
-                    />
-                  </div>
-
-                  <div className="text-right">
-                    <Link href="/auth/forgot-password">
-                      <a className="text-blue-600 hover:text-blue-700 text-sm font-medium">
-                        Forgot password?
-                      </a>
-                    </Link>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full py-3 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors"
-                  >
-                    Login
-                  </button>
-
-                  <p className="text-center text-gray-600 text-sm">
-                    Create an account{' '}
-                    <Link href="/auth/register">
-                      <a className="text-blue-600 hover:text-blue-700 font-medium">
-                        Signup now
-                      </a>
-                    </Link>
-                  </p>
-                </form>
+            <div className="text-center max-w-3xl mx-auto">
+              <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+                <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-cyan-200">
+                  Recover Your Lost
+                </span>
+                <br />
+                Cryptocurrency
+              </h1>
+              <p className="mt-6 text-lg leading-8 text-gray-300">
+                With our 99% success rate and only 10% upfront fee, we help you recover your lost crypto assets.
+                Professional service, transparent process, guaranteed results.
+              </p>
+              <div className="mt-10 flex items-center justify-center gap-6">
+                <Link href="/dashboard">
+                  <a className="rounded-lg bg-[#00e5cc] px-8 py-3 text-lg font-semibold text-black shadow-sm hover:bg-[#00d1ba] transition-colors">
+                    Start Recovery
+                  </a>
+                </Link>
+                <Link href="/dashboard">
+                  <a className="text-lg font-semibold text-white hover:text-[#00e5cc] transition-colors">
+                    Learn More <span aria-hidden="true">→</span>
+                  </a>
+                </Link>
               </div>
             </div>
           </div>
