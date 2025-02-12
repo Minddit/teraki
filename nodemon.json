@@ -1,0 +1,6 @@
+{
+  "watch": ["pages", "components", "styles", "hooks", "data"],
+  "ext": ".ts,.js,.tsx,.jsx,.css",
+  "ignore": [".git", "node_modules", ".next"],
+  "exec": "next dev"
+}

@@ -1,15 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable strict mode for better development
   reactStrictMode: true,
-  
-  // Configure image domains
-  images: {
-    domains: ['teraki.vercel.app'],
-  },
-  
-  // Output as standalone for better deployment
-  output: 'standalone',
+  swcMinify: true,
 };
 
 module.exports = nextConfig;
+
+module.exports = {
+  images: {
+    domains: ["cdn6.f-cdn.com", "media-exp1.licdn.com", "images.pexels.com"],
+  },
+}

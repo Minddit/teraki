@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+::-webkit-scrollbar {
+@apply w-[8px] 
+}
+
+::-webkit-scrollbar-track {
+ @apply bg-transparent
+}
+
+::-webkit-scrollbar-thumb {
+ @apply bg-colorGrayLight dark:bg-colorWhite_DM rounded-full;
+}
+
+@layer base {
+    h1 {
+        @apply text-[2rem];
+    }
+
+    h2 {
+        @apply text-[1.2rem];
+    }
+
+    h3 {
+        @apply text-[1rem];
+    }
+
+    h4 {
+        @apply text-[0.77rem];
+    }
+
+    h5 {
+        @apply text-[0.76rem] font-bold;
+    }
+
+    h6 {
+        @apply text-[0.76rem];
+    }
+
+    p {
+        @apply text-[0.86rem] text-colorGrayDark dark:text-colorGrayDark_DM;
+    }
+
+    small {
+        @apply text-[0.77rem] font-light;
+    }
+}
+
+@layer components {
+    .active-theme {
+        @apply bg-colorDark dark:bg-colorDark_DM text-colorWhite dark:text-colorWhite_DM rounded-full
+    }
+
+    .active-menu {
+        @apply bg-colorWhite dark:bg-colorWhite_DM text-colorPrimary before:content-[''] before:w-[6px] before:h-full before:bg-colorPrimary
+    }
+
+    div.card:nth-child(1) {
+        @apply bg-gradient-to-l from-[#f6a49e] to-[#fa7986] shadow-card1 hover:shadow-none;
+    }
+
+    div.card:nth-child(2) {
+        @apply bg-gradient-to-l from-[#7f8191] to-[#27282f] shadow-card2 hover:shadow-none;
+    }
+
+    div.card:nth-child(3) {
+        @apply bg-gradient-to-l from-[#5d70ff] to-[#5719c2] shadow-card3 hover:shadow-none;
+    }
+}
