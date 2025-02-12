@@ -6,28 +6,32 @@ const steps = [
         icon: "bi-headset",
         status: "Active",
         color: "text-blue-500",
-        bg: "bg-blue-100"
+        bg: "bg-blue-100",
+        description: "Initial contact and case assessment"
     },
     {
         title: "Transaction Details",
         icon: "bi-shield-check",
         status: "Pending",
         color: "text-purple-500",
-        bg: "bg-purple-100"
+        bg: "bg-purple-100",
+        description: "Provide transaction and wallet details"
     },
     {
         title: "We Start Tracking",
         icon: "bi-search",
         status: "Pending",
         color: "text-amber-500",
-        bg: "bg-amber-100"
+        bg: "bg-amber-100",
+        description: "Advanced blockchain analysis begins"
     },
     {
         title: "Your Crypto Recovered",
         icon: "bi-coin",
         status: "Pending",
         color: "text-green-500",
-        bg: "bg-green-100"
+        bg: "bg-green-100",
+        description: "Successful recovery and transfer back"
     }
 ]
 
