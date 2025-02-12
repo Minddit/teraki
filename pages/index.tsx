@@ -150,9 +150,9 @@ export default function Landing() {
                 
                 {/* Login/Signup Tabs */}
                 <div className="flex bg-[#1B1B1B] p-1 rounded-lg mb-8">
-                  <button className="flex-1 py-3 px-6 text-black font-medium bg-[#00e5cc] rounded-lg transition-all text-center">
+                  <div className="flex-1 py-3 px-6 text-black font-medium bg-[#00e5cc] rounded-lg transition-all text-center cursor-default">
                     Login
-                  </button>
+                  </div>
                   <Link href="/auth/register">
                     <a className="flex-1 py-3 px-6 text-gray-400 font-medium text-center hover:text-[#00e5cc] transition-colors">
                       Signup
