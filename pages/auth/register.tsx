@@ -31,6 +31,20 @@ export default function Register() {
     }
 
     try {
+      // First check if user exists
+      const { data: existingUser } = await supabase
+        .from('auth.users')
+        .select('email')
+        .eq('email', email)
+        .single()
+
+      if (existingUser) {
+        setError('An account with this email already exists')
+        setLoading(false)
+        return
+      }
+
+      // If no existing user, proceed with registration
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -41,10 +55,25 @@ export default function Register() {
 
       if (error) throw error
 
-      // Show success message and redirect
-      alert('Registration successful! Please check your email to verify your account.')
-      router.push('/')
+      if (data?.user) {
+        // Create profile in public.users table
+        const { error: profileError } = await supabase
+          .from('users')
+          .insert([{ 
+            id: data.user.id,
+            email: email,
+            created_at: new Date().toISOString()
+          }])
+
+        if (profileError) throw profileError
+
+        alert('Registration successful! Please check your email to verify your account.')
+        router.push('/')
+      } else {
+        throw new Error('Registration failed')
+      }
     } catch (error) {
+      console.error('Registration error:', error)
       setError(error instanceof Error ? error.message : 'An error occurred')
     } finally {
       setLoading(false)
