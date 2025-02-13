@@ -55,7 +55,7 @@ export default function Register() {
           data: {
             confirmation_token: confirmationToken
           },
-          emailRedirectTo: `${window.location.origin}/auth/verify-email?token=${confirmationToken}`,
+          emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || window.location.origin}/auth/verify-email?token=${confirmationToken}`,
         },
       })
 
