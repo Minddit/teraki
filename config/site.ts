@@ -1,6 +1,6 @@
 // Site configuration
 export const siteConfig = {
-  // Folosim automat VERCEL_URL în producție și localhost în development
-  url: process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000'
+  // URL-ul site-ului - simplu și direct
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 }
 
