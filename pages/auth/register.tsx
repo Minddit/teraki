@@ -55,9 +55,7 @@ export default function Register() {
           data: {
             confirmation_token: confirmationToken
           },
-          emailRedirectTo: typeof window !== 'undefined' ? 
-            (process.env.NODE_ENV === 'production' ? 'https://teraki.vercel.app' : window.location.origin) + `/auth/verify-email?token=${confirmationToken}` :
-            `https://teraki.vercel.app/auth/verify-email?token=${confirmationToken}`,
+          emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/auth/verify-email?token=${confirmationToken}`,
         },
       })
 
