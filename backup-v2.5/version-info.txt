@@ -1,0 +1,6 @@
+Backup v2.5 - Thu Feb 13 12:10:47 EET 2025
+commit 8f60c43d35f84dfe6ba2f27622106b6550f31e8d
+Author: Stancu Ionut <teraki@Stancus-iMac.local>
+Date:   Thu Feb 13 10:55:25 2025 +0200
+
+    feat: add email verification message after registration
