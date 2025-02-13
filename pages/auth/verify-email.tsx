@@ -18,6 +18,17 @@ export default function VerifyEmail() {
           return
         }
 
+        // Verifică dacă avem și code pentru auth.users
+        if (router.query.code) {
+          const { error: verifyError } = await supabase.auth.verifyOtp({
+            token_hash: router.query.code as string,
+            type: 'email'
+          })
+          
+          if (verifyError) throw verifyError
+        }
+
+        // Actualizează și în public.users
         const { data, error: dbError } = await supabase
           .from('users')
           .update({ 
