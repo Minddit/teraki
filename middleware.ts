@@ -34,32 +34,24 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  try {
-    // Verificăm sesiunea cu serverul Supabase
-    const { data: { user }, error } = await supabase.auth.getUser()
-    
-    if (error) throw error
+  // 1. Verificăm dacă ruta curentă este publică
+  const publicPaths = ['/', '/auth/login', '/auth/register', '/auth/verify-email']
+  const isPublicRoute = publicPaths.includes(request.nextUrl.pathname)
 
-    const isAuthPage = request.nextUrl.pathname.startsWith('/auth')
-    const isPublicRoute = request.nextUrl.pathname === '/' || isAuthPage
+  // 2. Obținem sesiunea
+  const { data: { session } } = await supabase.auth.getSession()
 
-    // Allow access to verify-email page without session
-    if (request.nextUrl.pathname === '/auth/verify-email') {
-      return response
-    }
-
-    // If user is not signed in and trying to access protected routes
-    if (!user && !isPublicRoute) {
+  // 3. Gestionăm rutele publice vs. protejate
+  if (!session) {
+    // Dacă nu avem sesiune și încercăm să accesăm o rută protejată
+    if (!isPublicRoute) {
       return NextResponse.redirect(new URL('/auth/login', request.url))
     }
-
-    // If user is signed in and trying to access auth pages
-    if (user && (request.nextUrl.pathname === '/auth/login' || request.nextUrl.pathname === '/auth/register')) {
+  } else {
+    // Dacă avem sesiune și încercăm să accesăm login/register
+    if (request.nextUrl.pathname === '/auth/login' || request.nextUrl.pathname === '/auth/register') {
       return NextResponse.redirect(new URL('/dashboard', request.url))
     }
-  } catch (error) {
-    // În caz de eroare, redirecționăm către login
-    return NextResponse.redirect(new URL('/auth/login', request.url))
   }
 
   return response
