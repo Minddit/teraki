@@ -81,9 +81,14 @@ export default function Login() {
         </div>
 
         <form onSubmit={handleLogin} className="space-y-6">
-          {router.query.registration === 'success' && (
+          {router.query.registration === 'pending' && (
             <div className="bg-emerald-900/20 border border-emerald-500/20 text-emerald-500 px-4 py-3 rounded-lg text-sm">
-              Registration successful! Please check your email to verify your account before logging in.
+              Înregistrare reușită! Te rugăm să verifici emailul și să confirmi adresa înainte de a te autentifica.
+            </div>
+          )}
+          {router.query.registration === 'verified' && (
+            <div className="bg-emerald-900/20 border border-emerald-500/20 text-emerald-500 px-4 py-3 rounded-lg text-sm">
+              Email confirmat cu succes! Te poți autentifica acum.
             </div>
           )}
           {error && (

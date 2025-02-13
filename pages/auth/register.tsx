@@ -77,8 +77,11 @@ export default function Register() {
             // Vom gestiona acest caz la prima autentificare
           }
 
+          // Sign out după înregistrare pentru a forța verificarea emailului
+          await supabase.auth.signOut()
+          
           setError(null)
-          router.push('/auth/login?registration=success')
+          router.push('/auth/login?registration=pending')
         } catch (profileError) {
           console.error('Profile creation error:', profileError)
           // Continuăm cu succes chiar dacă inserarea în users eșuează

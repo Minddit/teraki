@@ -28,7 +28,7 @@ export default function VerifyEmail() {
 
         if (dbError) throw dbError
 
-        router.push('/auth/login?verified=true')
+        router.push('/auth/login?registration=verified')
       } catch (err) {
         console.error('Eroare la verificarea emailului:', err)
         setError(err instanceof Error ? err.message : 'A apărut o eroare la verificare')
