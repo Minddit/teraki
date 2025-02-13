@@ -1,0 +1,75 @@
+INSTRUCȚIUNI PENTRU DEPLOY NOU
+
+1. CONFIGURARE VERCEL
+   A. Login în Vercel CLI:
+      ```bash
+      vercel login
+      ```
+
+   B. Creează proiect nou în Vercel:
+      - Import Git Repository
+      - Selectează repository-ul creat
+      - Framework Preset: Next.js
+      - Root Directory: ./
+
+   C. Variabile de Mediu:
+      Locație: Settings > Environment Variables
+      ```
+      # URL-ul principal al site-ului
+      NEXT_PUBLIC_SITE_URL=https://teraki.vercel.app
+      ```
+
+2. CONFIGURARE SUPABASE
+   A. Variabile de Mediu Supabase:
+      Locație: Project Settings > API
+      ```
+      NEXT_PUBLIC_SUPABASE_URL=https://[your-project].supabase.co
+      NEXT_PUBLIC_SUPABASE_ANON_KEY=[your-anon-key]
+      SUPABASE_SERVICE_ROLE_KEY=[your-service-role-key]
+      ```
+   A. Site URL:
+      - Setează la: https://teraki.vercel.app
+      - Locație: Authentication > URL Configuration > Site URL
+      - Acest URL este folosit ca default când nu este specificat un URL de redirect
+      - Este expus ca variabilă în secțiunea de template-uri email
+      - Nu se pot folosi wildcards aici
+   
+   B. Redirect URLs:
+      - Adaugă: http://localhost:3000/**
+      - Adaugă: https://*.vercel.app/**
+      - Locație: Authentication > URL Configuration > Redirect URLs
+      - Acestea sunt URL-urile permise pentru redirecționare după autentificare
+      - Se pot folosi wildcards (de exemplu https://*.domain.com)
+      - Folosește /** pentru a permite orice path după domeniu
+
+2. CONFIGURARE COD
+   - Fișierul config/site.ts folosește automat:
+     * localhost:3000 pentru development
+     * VERCEL_URL pentru production
+   - Nu necesită modificări manuale
+
+3. PAȘI PENTRU DEPLOY
+   a) Local Development:
+      - npm run dev
+      - Accesibil la http://localhost:3000
+   
+   b) Production Deploy:
+      - Git push în main
+      - Vercel face deploy automat
+      - Accesibil la https://teraki.vercel.app
+
+4. VERIFICARE DUPĂ DEPLOY
+   - Testează înregistrare user nou
+   - Verifică link confirmare email
+   - Verifică login după confirmare
+
+5. TROUBLESHOOTING
+   - Verifică logs în Vercel Dashboard
+   - Verifică logs în Supabase Dashboard
+   - Asigură-te că URL-urile de redirect sunt corecte
+
+6. NOTĂ IMPORTANTĂ
+   Această configurație este optimizată pentru Vercel și va funcționa automat pentru:
+   - Development (localhost:3000)
+   - Production (teraki.vercel.app)
+   - Preview deployments (*.vercel.app)

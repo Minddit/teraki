@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { supabase } from '../../utils/supabase'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import { siteConfig } from '../../config/site'
 
 export default function Register() {
   const [email, setEmail] = useState('')
@@ -55,7 +56,7 @@ export default function Register() {
           data: {
             confirmation_token: confirmationToken
           },
-          emailRedirectTo: `${typeof window !== 'undefined' ? window.location.origin : process.env.NEXT_PUBLIC_SITE_URL}/auth/verify-email?token=${confirmationToken}`,
+          emailRedirectTo: `${siteConfig.url}/auth/verify-email?token=${confirmationToken}`,
         },
       })
 
