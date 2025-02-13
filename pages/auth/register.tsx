@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { supabase } from '../../utils/supabase'
+import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { siteConfig } from '../../config/site'
@@ -33,7 +33,8 @@ export default function Register() {
 
     try {
       // First check if email confirmation is required
-      const { data: { session }, error: sessionError } = await supabase.auth.getSession()
+      const supabase = createClient()
+const { data: { session }, error: sessionError } = await supabase.auth.getSession()
       if (sessionError) throw sessionError
       
       // First check if user exists
@@ -54,7 +55,9 @@ export default function Register() {
         email,
         password,
         options: {
-          emailRedirectTo: `${siteConfig.url}/auth/verify-email`,
+          emailRedirectTo: typeof window !== 'undefined' ? 
+            (process.env.NODE_ENV === 'production' ? 'https://teraki.vercel.app' : window.location.origin) + `/auth/verify-email?token=${crypto.randomUUID()}` :
+            `https://teraki.vercel.app/auth/verify-email?token=${crypto.randomUUID()}`,
           data: {
             email_confirmed: false
           }

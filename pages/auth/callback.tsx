@@ -1,12 +1,13 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { supabase } from '../../utils/supabase'
+import { createClient } from '@/utils/supabase/client'
 
 export default function AuthCallback() {
   const router = useRouter()
 
   useEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
+    const supabase = createClient()
+const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (event === 'SIGNED_IN') {
         // User has confirmed their email and is signed in
         router.push('/dashboard')

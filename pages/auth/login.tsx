@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { supabase } from '../../utils/supabase'
+import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
@@ -13,7 +13,8 @@ export default function Login() {
   // Check if user is already authenticated
   useEffect(() => {
     const checkUser = async () => {
-      const { data: { session } } = await supabase.auth.getSession()
+      const supabase = createClient()
+const { data: { session } } = await supabase.auth.getSession()
       if (session) {
         router.replace('/dashboard')
       }
@@ -28,7 +29,8 @@ export default function Login() {
 
     try {
       // Check if email is confirmed
-      const { data: userData } = await supabase
+      const supabase = createClient()
+const { data: userData } = await supabase
         .from('users')
         .select('email_confirmed')
         .eq('email', email)
@@ -40,7 +42,8 @@ export default function Login() {
         return
       }
 
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const supabase = createClient()
+const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       })

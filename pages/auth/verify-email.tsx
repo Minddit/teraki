@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { supabase } from '../../utils/supabase'
+import { createClient } from '@/utils/supabase/client'
 
 export default function VerifyEmail() {
   const router = useRouter()
@@ -9,12 +9,33 @@ export default function VerifyEmail() {
   
   useEffect(() => {
     const verifyEmail = async () => {
+      const token = router.query.token
+      if (!token || typeof token !== 'string') {
+        throw new Error('Invalid verification token')
+      }
       try {
         // Verify Supabase token
-        const { data: { user }, error: verifyError } = await supabase.auth.getUser()
+        const supabase = createClient()
+const { data: { user }, error: verifyError } = await supabase.auth.getUser()
         
         if (verifyError) throw verifyError
         if (!user) throw new Error('User not found')
+
+        // Verificăm token-ul în baza de date
+        const { data: userData, error: userError } = await supabase
+          .from('users')
+          .select('email_confirmed')
+          .eq('id', user.id)
+          .eq('confirmation_token', token)
+          .single()
+
+        if (userError || !userData) {
+          throw new Error('Invalid verification token')
+        }
+
+        if (userData.email_confirmed) {
+          throw new Error('Email already verified')
+        }
 
         // Actualizăm statusul în baza de date
         const { error: dbError } = await supabase
