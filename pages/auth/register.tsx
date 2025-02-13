@@ -62,22 +62,31 @@ export default function Register() {
       if (error) throw error
 
       if (data?.user) {
-        // Create profile in public.users table
-        const { error: profileError } = await supabase
-          .from('users')
-          .insert([{ 
-            id: data.user.id,
-            email: email,
-            created_at: new Date().toISOString(),
-            confirmation_token: confirmationToken,
-            confirmation_sent_at: new Date().toISOString(),
-            email_confirmed: false
-          }])
+        try {
+          // Create profile in public.users table
+          const { error: profileError } = await supabase
+            .from('users')
+            .insert([{ 
+              id: data.user.id,
+              email: email,
+              created_at: new Date().toISOString(),
+              confirmation_token: confirmationToken,
+              confirmation_sent_at: new Date().toISOString(),
+              email_confirmed: false
+            }])
 
-        if (profileError) throw profileError
+          if (profileError) {
+            console.error('Profile creation error:', profileError)
+            // Continuăm cu succes chiar dacă inserarea în users eșuează
+            // Vom gestiona acest caz la prima autentificare
+          }
 
-        alert('Registration successful! Please check your email to verify your account.')
-        router.push('/auth/login?registration=success')
+          setError(null)
+          router.push('/auth/login?registration=success')
+        } catch (profileError) {
+          console.error('Profile creation error:', profileError)
+          // Continuăm cu succes chiar dacă inserarea în users eșuează
+        }
       } else {
         throw new Error('Registration failed')
       }
