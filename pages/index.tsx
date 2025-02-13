@@ -1,37 +1,6 @@
 import Head from "next/head"
 import Link from "next/link"
-import { useState } from 'react'
-import { supabase } from '../utils/supabase'
-import { useRouter } from 'next/router'
-
 export default function Landing() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const router = useRouter()
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setError(null)
-
-    try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      })
-
-      if (error) throw error
-
-      // Redirect to dashboard on success
-      router.push('/dashboard')
-    } catch (error) {
-      setError(error instanceof Error ? error.message : 'An error occurred')
-    } finally {
-      setLoading(false)
-    }
-  }
   return (
     <>
       <Head>
@@ -64,12 +33,12 @@ export default function Landing() {
                 Professional service, transparent process, guaranteed results.
               </p>
               <div className="mt-10 flex items-center justify-center gap-6">
-                <Link href="/dashboard">
+                <Link href="/auth/login">
                   <a className="rounded-lg bg-[#00e5cc] px-8 py-3 text-lg font-semibold text-black shadow-sm hover:bg-[#00d1ba] transition-colors">
                     Start Recovery
                   </a>
                 </Link>
-                <Link href="/dashboard">
+                <Link href="/auth/login">
                   <a className="text-lg font-semibold text-white hover:text-[#00e5cc] transition-colors">
                     Learn More <span aria-hidden="true">→</span>
                   </a>
@@ -129,146 +98,7 @@ export default function Landing() {
             </div>
           </div>
 
-          {/* Auth Section */}
-          <div className="relative mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
-            <div className="absolute inset-0">
-              <div className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-cyan-500/5 to-transparent blur-2xl" />
-              <div className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-cyan-500/5 to-transparent blur-2xl" />
-            </div>
 
-            <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-              {/* Left Column - Auth Card */}
-              <div className="relative bg-[#1B1B1B]/40 backdrop-blur-sm rounded-2xl p-8 border border-gray-800/50 shadow-xl">
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600">
-                  <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-                  </svg>
-                </div>
-                <h2 className="mt-6 text-2xl font-bold text-center text-white mb-6">
-                  Login Form
-                </h2>
-                
-                {/* Login/Signup Tabs */}
-                <div className="flex bg-[#1B1B1B] p-1 rounded-lg mb-8">
-                  <div className="flex-1 py-3 px-6 text-black font-medium bg-[#00e5cc] rounded-lg transition-all text-center cursor-default">
-                    Login
-                  </div>
-                  <Link href="/auth/register">
-                    <a className="flex-1 py-3 px-6 text-gray-400 font-medium text-center hover:text-[#00e5cc] transition-colors">
-                      Signup
-                    </a>
-                  </Link>
-                </div>
-
-                <form onSubmit={handleLogin} className="space-y-6">
-                  {error && (
-                    <div className="bg-red-900/20 border border-red-500/20 text-red-500 px-4 py-3 rounded-lg text-sm">
-                      {error}
-                    </div>
-                  )}
-
-                  <div className="space-y-4">
-                    <input
-                      type="email"
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Email Address"
-                      className="w-full px-4 py-3 bg-[#1B1B1B] text-white placeholder:text-gray-400 rounded-lg border border-gray-700 focus:border-[#00e5cc] focus:ring-[#00e5cc] transition-colors"
-                    />
-
-                    <input
-                      type="password"
-                      required
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Password"
-                      className="w-full px-4 py-3 bg-[#1B1B1B] text-white placeholder:text-gray-400 rounded-lg border border-gray-700 focus:border-[#00e5cc] focus:ring-[#00e5cc] transition-colors"
-                    />
-                  </div>
-
-                  <div className="text-right">
-                    <Link href="/auth/forgot-password">
-                      <a className="text-[#00e5cc] hover:text-[#00d1ba] text-sm font-medium">
-                        Forgot password?
-                      </a>
-                    </Link>
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full py-3 rounded-lg bg-[#00e5cc] text-black font-medium hover:bg-[#00d1ba] transition-colors"
-                  >
-                    {loading ? 'Signing in...' : 'Login'}
-                  </button>
-
-                  <p className="text-center text-gray-400 text-sm">
-                    Create an account{' '}
-                    <Link href="/auth/register">
-                      <a className="text-[#00e5cc] hover:text-[#00d1ba] font-medium">
-                        Signup now
-                      </a>
-                    </Link>
-                  </p>
-                </form>
-              </div>
-
-              {/* Right Column - Text Content */}
-              <div className="lg:pl-12">
-                <h2 className="text-3xl font-bold tracking-tight text-white">
-                  Start Your Recovery Journey
-                </h2>
-                <p className="mt-6 text-lg leading-8 text-gray-300">
-                  Join thousands of satisfied clients who have successfully recovered their lost cryptocurrency assets through our professional service.
-                </p>
-                
-                <div className="mt-10 space-y-6">
-                  <div className="flex gap-4">
-                    <div className="flex-shrink-0">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-500/10">
-                        <svg className="h-6 w-6 text-cyan-400" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                      </div>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold text-white">Quick Setup</h3>
-                      <p className="mt-2 text-gray-300">Create your account in minutes and start the recovery process immediately.</p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <div className="flex-shrink-0">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-500/10">
-                        <svg className="h-6 w-6 text-cyan-400" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-                        </svg>
-                      </div>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold text-white">Secure Process</h3>
-                      <p className="mt-2 text-gray-300">Your information is protected with enterprise-grade security and encryption.</p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <div className="flex-shrink-0">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-500/10">
-                        <svg className="h-6 w-6 text-cyan-400" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                      </div>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold text-white">24/7 Support</h3>
-                      <p className="mt-2 text-gray-300">Our expert team is always available to assist you throughout the recovery process.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </main>
     </>
