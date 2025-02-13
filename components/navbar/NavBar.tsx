@@ -101,20 +101,18 @@ export default function NavBar() {
                   setTheme("dark");
                 }}></i>
             </div>
-            {/** profile image */}
-            <div className="flex items-center gap-2">
-              <div className="block w-[2rem] h-[2rem] overflow-hidden rounded-[50%]">
-                <Image
-                  width={40}
-                  height={40}
-                  src="/images/me.jpeg"
-                  alt="Oreol profile"
-                />
-              </div>
-              <div>
-                {/** Popover Menu */}
-                <PopoverMenu />
-              </div>
+            {/** Auth buttons */}
+            <div className="flex items-center gap-4">
+              <Link href="/auth/login">
+                <a className="text-gray-700 dark:text-gray-300 hover:text-[#00e5cc] transition-colors font-medium">
+                  Login
+                </a>
+              </Link>
+              <Link href="/auth/register">
+                <a className="bg-[#00e5cc] text-black px-6 py-2 rounded-lg hover:bg-[#00d1ba] transition-colors font-medium">
+                  Register
+                </a>
+              </Link>
             </div>
             {/** button to display aside bar menu */}
             <button className="lg:hidden" onClick={showAsideBarMenu}>
