@@ -1,5 +1,7 @@
 INSTRUCȚIUNI PENTRU DEPLOY NOU
 
+ATENȚIE: Aceste instrucțiuni trebuie urmate DE FIECARE DATĂ când faci deploy pe un Vercel nou!
+
 1. CONFIGURARE VERCEL
    A. Login în Vercel CLI:
       ```bash
