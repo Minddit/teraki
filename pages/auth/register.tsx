@@ -31,25 +31,18 @@ export default function Register() {
     }
 
     try {
-      // First check if user exists
-      const { data: existingUser } = await supabase
-        .from('auth.users')
-        .select('email')
-        .eq('email', email)
-        .single()
-
-      if (existingUser) {
-        setError('An account with this email already exists')
-        setLoading(false)
-        return
-      }
-
+      // Generate unique confirmation token
+      const confirmationToken = crypto.randomUUID()
+      
       // If no existing user, proceed with registration
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
+          data: {
+            confirmation_token: confirmationToken
+          },
+          emailRedirectTo: `${window.location.origin}/auth/verify-email?token=${confirmationToken}`,
         },
       })
 
@@ -62,13 +55,16 @@ export default function Register() {
           .insert([{ 
             id: data.user.id,
             email: email,
-            created_at: new Date().toISOString()
+            created_at: new Date().toISOString(),
+            confirmation_token: confirmationToken,
+            confirmation_sent_at: new Date().toISOString(),
+            email_confirmed: false
           }])
 
         if (profileError) throw profileError
 
         alert('Registration successful! Please check your email to verify your account.')
-        router.push('/')
+        router.push('/auth/login?registration=success')
       } else {
         throw new Error('Registration failed')
       }

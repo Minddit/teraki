@@ -27,6 +27,19 @@ export default function Login() {
     setError(null)
 
     try {
+      // Verifică dacă emailul este confirmat
+      const { data: userData } = await supabase
+        .from('users')
+        .select('email_confirmed')
+        .eq('email', email)
+        .single()
+
+      if (userData && !userData.email_confirmed) {
+        setError('Please verify your email address before logging in')
+        setLoading(false)
+        return
+      }
+
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
