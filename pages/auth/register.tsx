@@ -32,8 +32,21 @@ export default function Register() {
 
     try {
       // Generate unique confirmation token
-      const confirmationToken = crypto.randomUUID()
+      const confirmationToken = crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2)
       
+      // First check if user exists
+      const { data: existingUser } = await supabase
+        .from('users')
+        .select('email')
+        .eq('email', email)
+        .single()
+
+      if (existingUser) {
+        setError('An account with this email already exists')
+        setLoading(false)
+        return
+      }
+
       // If no existing user, proceed with registration
       const { data, error } = await supabase.auth.signUp({
         email,
