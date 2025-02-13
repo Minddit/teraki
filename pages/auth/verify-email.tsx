@@ -28,10 +28,6 @@ export default function VerifyEmail() {
 
         if (dbError) throw dbError
 
-        if (!data || data.length === 0) {
-          throw new Error('Token invalid sau expirat')
-        }
-
         router.push('/auth/login?verified=true')
       } catch (err) {
         console.error('Eroare la verificarea emailului:', err)
