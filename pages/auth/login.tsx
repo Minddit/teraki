@@ -81,6 +81,11 @@ export default function Login() {
         </div>
 
         <form onSubmit={handleLogin} className="space-y-6">
+          {router.query.registration === 'success' && (
+            <div className="bg-emerald-900/20 border border-emerald-500/20 text-emerald-500 px-4 py-3 rounded-lg text-sm">
+              Registration successful! Please check your email to verify your account before logging in.
+            </div>
+          )}
           {error && (
             <div className="bg-red-900/20 border border-red-500/20 text-red-500 px-4 py-3 rounded-lg text-sm">
               {error}
