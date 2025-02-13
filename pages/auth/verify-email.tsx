@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { createClient } from '@/utils/supabase/client'
+import { createClient } from '../../utils/supabase/client'
 
 export default function VerifyEmail() {
   const router = useRouter()

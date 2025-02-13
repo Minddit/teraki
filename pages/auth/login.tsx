@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { createClient } from '@/utils/supabase/client'
+import { createClient } from '../../utils/supabase/client'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
@@ -30,7 +30,7 @@ const { data: { session } } = await supabase.auth.getSession()
     try {
       // Check if email is confirmed
       const supabase = createClient()
-const { data: userData } = await supabase
+      const { data: userData } = await supabase
         .from('users')
         .select('email_confirmed')
         .eq('email', email)
@@ -42,8 +42,7 @@ const { data: userData } = await supabase
         return
       }
 
-      const supabase = createClient()
-const { data, error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       })

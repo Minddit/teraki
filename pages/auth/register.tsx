@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { createClient } from '@/utils/supabase/client'
+import { createClient } from '../../utils/supabase/client'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { siteConfig } from '../../config/site'
