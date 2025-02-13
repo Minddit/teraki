@@ -1,48 +1,25 @@
 INSTRUCȚIUNI PENTRU DEPLOY NOU
 
-ATENȚIE: Aceste instrucțiuni trebuie urmate DE FIECARE DATĂ când faci deploy pe un Vercel nou!
-
 1. CONFIGURARE VERCEL
-   A. Login în Vercel CLI:
-      ```bash
-      vercel login
-      ```
-
-   B. Creează proiect nou în Vercel:
+   A. Import Repository în Vercel:
       - Import Git Repository
-      - Selectează repository-ul creat
       - Framework Preset: Next.js
       - Root Directory: ./
 
-   C. Variabile de Mediu:
-      Locație: Settings > Environment Variables
-      ```
-      # URL-ul principal al site-ului
-      NEXT_PUBLIC_SITE_URL=https://teraki.vercel.app
-      ```
-
 2. CONFIGURARE SUPABASE
-   A. Variabile de Mediu Supabase:
-      Locație: Project Settings > API
-      ```
-      NEXT_PUBLIC_SUPABASE_URL=https://[your-project].supabase.co
-      NEXT_PUBLIC_SUPABASE_ANON_KEY=[your-anon-key]
-      SUPABASE_SERVICE_ROLE_KEY=[your-service-role-key]
-      ```
    A. Site URL:
-      - Setează la: https://teraki.vercel.app
+      - Setează la: https://*.vercel.app
       - Locație: Authentication > URL Configuration > Site URL
-      - Acest URL este folosit ca default când nu este specificat un URL de redirect
-      - Este expus ca variabilă în secțiunea de template-uri email
-      - Nu se pot folosi wildcards aici
    
    B. Redirect URLs:
       - Adaugă: http://localhost:3000/**
       - Adaugă: https://*.vercel.app/**
       - Locație: Authentication > URL Configuration > Redirect URLs
-      - Acestea sunt URL-urile permise pentru redirecționare după autentificare
-      - Se pot folosi wildcards (de exemplu https://*.domain.com)
-      - Folosește /** pentru a permite orice path după domeniu
+
+ATAT! Restul funcționează automat:
+- Development: localhost:3000
+- Production: URL-ul Vercel
+- Preview deployments: URL-ul Vercel pentru fiecare PR
 
 2. CONFIGURARE COD
    - Fișierul config/site.ts folosește automat:
