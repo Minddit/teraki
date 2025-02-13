@@ -10,7 +10,7 @@ export default function Login() {
   const [error, setError] = useState<string | null>(null)
   const router = useRouter()
 
-  // Verifică dacă utilizatorul este deja autentificat
+  // Check if user is already authenticated
   useEffect(() => {
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession()
@@ -27,7 +27,7 @@ export default function Login() {
     setError(null)
 
     try {
-      // Verifică dacă emailul este confirmat
+      // Check if email is confirmed
       const { data: userData } = await supabase
         .from('users')
         .select('email_confirmed')
@@ -83,12 +83,12 @@ export default function Login() {
         <form onSubmit={handleLogin} className="space-y-6">
           {router.query.registration === 'pending' && (
             <div className="bg-emerald-900/20 border border-emerald-500/20 text-emerald-500 px-4 py-3 rounded-lg text-sm">
-              Înregistrare reușită! Te rugăm să verifici emailul și să confirmi adresa înainte de a te autentifica.
+              Registration successful! Please check your email and confirm your address before logging in.
             </div>
           )}
           {router.query.registration === 'verified' && (
             <div className="bg-emerald-900/20 border border-emerald-500/20 text-emerald-500 px-4 py-3 rounded-lg text-sm">
-              Email confirmat cu succes! Te poți autentifica acum.
+              Email confirmed successfully! You can now log in.
             </div>
           )}
           {error && (

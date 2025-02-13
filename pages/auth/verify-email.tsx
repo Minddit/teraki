@@ -10,7 +10,7 @@ export default function VerifyEmail() {
   useEffect(() => {
     const verifyEmail = async () => {
       try {
-        // Verificăm token-ul Supabase
+        // Verify Supabase token
         const { data: { user }, error: verifyError } = await supabase.auth.getUser()
         
         if (verifyError) throw verifyError
@@ -30,8 +30,8 @@ export default function VerifyEmail() {
 
         router.push('/auth/login?registration=verified')
       } catch (err) {
-        console.error('Eroare la verificarea emailului:', err)
-        setError(err instanceof Error ? err.message : 'A apărut o eroare la verificare')
+        console.error('Error verifying email:', err)
+        setError(err instanceof Error ? err.message : 'An error occurred during verification')
       } finally {
         setVerifying(false)
       }
@@ -48,7 +48,7 @@ export default function VerifyEmail() {
         {verifying ? (
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#00e5cc] mx-auto"></div>
-            <p className="mt-4 text-white">Se verifică emailul...</p>
+            <p className="mt-4 text-white">Verifying email...</p>
           </div>
         ) : error ? (
           <div className="text-center">
@@ -57,13 +57,13 @@ export default function VerifyEmail() {
               onClick={() => router.push('/auth/login')}
               className="text-[#00e5cc] hover:text-[#00d1ba]"
             >
-              Înapoi la Login
+              Back to Login
             </button>
           </div>
         ) : (
           <div className="text-center">
-            <div className="text-[#00e5cc] mb-4">Email verificat cu succes!</div>
-            <p className="text-white mb-4">Vă redirecționăm către pagina de login...</p>
+            <div className="text-[#00e5cc] mb-4">Email verified successfully!</div>
+            <p className="text-white mb-4">Redirecting to login page...</p>
           </div>
         )}
       </div>

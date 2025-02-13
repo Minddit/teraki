@@ -32,7 +32,9 @@ export default function Register() {
     }
 
     try {
-      // Folosim doar redirect-ul către pagina noastră de verificare
+      // First check if email confirmation is required
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession()
+      if (sessionError) throw sessionError
       
       // First check if user exists
       const { data: existingUser } = await supabase
@@ -53,6 +55,9 @@ export default function Register() {
         password,
         options: {
           emailRedirectTo: `${siteConfig.url}/auth/verify-email`,
+          data: {
+            email_confirmed: false
+          }
         },
       })
 
@@ -74,7 +79,7 @@ export default function Register() {
           if (profileError) {
             console.error('Profile creation error:', profileError)
             // Continuăm cu succes chiar dacă inserarea în users eșuează
-            // Vom gestiona acest caz la prima autentificare
+            // We will handle this case at first login
           }
 
           // Sign out după înregistrare pentru a forța verificarea emailului

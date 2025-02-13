@@ -36,9 +36,17 @@ export async function middleware(request: NextRequest) {
 
   const { data: { session } } = await supabase.auth.getSession()
 
+  const isAuthPage = request.nextUrl.pathname.startsWith('/auth')
+  const isPublicRoute = request.nextUrl.pathname === '/' || isAuthPage
+
+  // Allow access to verify-email page without session
+  if (request.nextUrl.pathname === '/auth/verify-email') {
+    return response
+  }
+
   // If user is not signed in and trying to access protected routes
-  if (!session && !request.nextUrl.pathname.startsWith('/auth') && !request.nextUrl.pathname.startsWith('/')) {
-    return NextResponse.redirect(new URL('/', request.url))
+  if (!session && !isPublicRoute) {
+    return NextResponse.redirect(new URL('/auth/login', request.url))
   }
 
   // If user is signed in and trying to access auth pages
