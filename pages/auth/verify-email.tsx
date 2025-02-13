@@ -10,33 +10,20 @@ export default function VerifyEmail() {
   useEffect(() => {
     const verifyEmail = async () => {
       try {
-        const token = router.query.token as string
+        // Verificăm token-ul Supabase
+        const { data: { user }, error: verifyError } = await supabase.auth.getUser()
         
-        if (!token) {
-          setError('Token de verificare lipsă')
-          setVerifying(false)
-          return
-        }
+        if (verifyError) throw verifyError
+        if (!user) throw new Error('User not found')
 
-        // Verifică dacă avem și code pentru auth.users
-        if (router.query.code) {
-          const { error: verifyError } = await supabase.auth.verifyOtp({
-            token_hash: router.query.code as string,
-            type: 'email'
-          })
-          
-          if (verifyError) throw verifyError
-        }
-
-        // Actualizează și în public.users
-        const { data, error: dbError } = await supabase
+        // Actualizăm statusul în baza de date
+        const { error: dbError } = await supabase
           .from('users')
           .update({ 
             email_confirmed: true,
-            confirmation_token: null,
             confirmation_sent_at: null 
           })
-          .match({ confirmation_token: token })
+          .eq('id', user.id)
           .select()
 
         if (dbError) throw dbError

@@ -32,8 +32,7 @@ export default function Register() {
     }
 
     try {
-      // Generate unique confirmation token
-      const confirmationToken = crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).substring(2)
+      // Folosim doar redirect-ul către pagina noastră de verificare
       
       // First check if user exists
       const { data: existingUser } = await supabase
@@ -53,10 +52,7 @@ export default function Register() {
         email,
         password,
         options: {
-          data: {
-            confirmation_token: confirmationToken
-          },
-          emailRedirectTo: `${siteConfig.url}/auth/verify-email?token=${confirmationToken}`,
+          emailRedirectTo: `${siteConfig.url}/auth/verify-email`,
         },
       })
 
@@ -71,7 +67,6 @@ export default function Register() {
               id: data.user.id,
               email: email,
               created_at: new Date().toISOString(),
-              confirmation_token: confirmationToken,
               confirmation_sent_at: new Date().toISOString(),
               email_confirmed: false
             }])
